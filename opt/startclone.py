@@ -221,8 +221,9 @@ class ClonePage(gtk.VBox, BaseFunc):
         box_bar.pack_start(self.label_bar)
         self.twopad = self.define_align(box_bar, 0.5, 0.5)
         #self.ebox.add(self.align_bar)
-        
+
         self.part_dict = get_parted()
+        self.save_part = []
        
         # 目标分区
         self.combo_target = gtk.combo_box_new_text()
@@ -281,6 +282,7 @@ class ClonePage(gtk.VBox, BaseFunc):
                 continue
             info = _("总容量:") + self.part_dict[key][1] + " " + _("分区格式:") + self.part_dict[key][2]
             self.combo_save.append_text(self.part_dict[key][0] + "(%s)" %(info))
+            self.save_part.append(self.part_dict[key][0])
         table.attach(self.combo_save, 1, 2, row, row + 1)
 
     def xz_add_row(self, table, row, label_text):
@@ -301,16 +303,21 @@ class ClonePage(gtk.VBox, BaseFunc):
     def on_target_change(self, widget):
         ac = widget.get_active()
         self.combo_save.get_model().clear()
+        self.save_part = []
+        
         for key in self.part_dict:
             if ac == key:
                 continue
             info = _("总容量:") + self.part_dict[key][1] + " " + _("分区格式:") + self.part_dict[key][2]
             self.combo_save.append_text(self.part_dict[key][0] + "(%s)" %(info))
+            self.save_part.append(self.part_dict[key][0])
         self.combo_save.set_active(0)
+        print self.part_dict[ac]
 
     def on_save_change(self, widget):
+        #o = self.combo_save.get_active()
+        #print self.save_part[o]
         pass
-
 
     def back_clone(self):
         ebox = gtk.EventBox()
@@ -386,10 +393,11 @@ class ClonePage(gtk.VBox, BaseFunc):
         elif x_comp == "lzma":
             name = name + ".img.lzma"
         elif x_comp == "lzop":
-            name = name + ".img.lzop"
+            name = name + ".img.lzo"
 
         fstype = self.part_dict[i][2]
-        o_dev = self.part_dict[o][0]
+        o_dev = self.save_part[o]
+        print i, i_dev, o, o_dev
         o_path = mount_dev(o_dev)
         #创建存储目录
         os.system("mkdir -p %s" %(o_path+"/"+dir_name))
