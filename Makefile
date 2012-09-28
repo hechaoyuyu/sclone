@@ -12,9 +12,9 @@ all:
 	
 # install
 install:
-	-install -d $(DESTDIR)$(PREFIX)/startos-clone
+	-install -d $(DESTDIR)$(PREFIX)/startos-clone/
 	-install -d $(DESTDIR)$(USR)/share/applications/
-	-install -d $(DESTDIR)$(USR)/bin/sclone
+	-install -d $(DESTDIR)$(USR)/bin/
 	-cp -r opt/* $(DESTDIR)$(PREFIX)/startos-clone
 	-install sclone.desktop $(DESTDIR)$(USR)/share/applications/
 	-install sclone $(DESTDIR)$(USR)/bin/sclone
