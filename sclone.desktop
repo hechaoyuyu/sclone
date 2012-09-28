@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Sclone
+Name[zh_CN]=Sclone克隆
+Comment=StartOS clone
+Comment[zh_CN]=在Livecd中克隆/还原您的分区
+GenericName[zh_CN]=在Livecd中克隆/还原您的分区
+Exec=sclone
+Icon=/opt/startos-clone/res/icon.png
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+StartupNotify=true
+Categories=System;
+
