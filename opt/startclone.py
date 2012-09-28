@@ -243,7 +243,7 @@ class ClonePage(gtk.VBox, BaseFunc):
 
         # 压缩类型
         self.xz_dict = {0:(_("使用pigz压缩"), "pigz"), 1:(_("使用pxz压缩"), "pxz"), \
-        2:(_("使用lzma压缩"), "lzma"), 3:(_("使用lzo压缩"), "lzo")}
+        2:(_("使用lzma压缩"), "lzma"), 3:(_("使用lzop压缩"), "lzop")}
         self.combo_xz = gtk.combo_box_new_text()
         self.xz_add_row(table, 2, _("压缩类型"))
         self.combo_xz.set_active(0)
@@ -385,8 +385,8 @@ class ClonePage(gtk.VBox, BaseFunc):
             name = name + ".img.xz"
         elif x_comp == "lzma":
             name = name + ".img.lzma"
-        elif x_comp == "lzo":
-            name = name + ".img.lzo"
+        elif x_comp == "lzop":
+            name = name + ".img.lzop"
 
         fstype = self.part_dict[i][2]
         o_dev = self.part_dict[o][0]
